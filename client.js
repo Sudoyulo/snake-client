@@ -1,24 +1,27 @@
 const net = require('net');
-const connect = function () {
+const setupInput = require('./input');
+const { IP, PORT } = require("./constants");
+
+
+const connect = function() {
   const conn = net.createConnection({
-    host: "165.227.47.243",
-    port: 50541
+    host: IP,
+    port: PORT
   });
 
   // interpret incoming data as text
   conn.setEncoding("utf8");
 
-  conn.on("connect", (data) => {
+  conn.on("connect", () => {
     console.log("Successfully connected.")
 
-    conn.write("Name: KY")
-
-  } )
-
-
+    conn.write("Name: KEV")
+    
+  });
 
   return conn;
 };
 
-connect();
+const conn = connect();
+setupInput(conn);
 module.exports = connect;
